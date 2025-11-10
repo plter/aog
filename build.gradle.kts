@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    implementation("org.graalvm.polyglot:polyglot:25.0.0")
+    implementation("org.graalvm.polyglot:js:25.0.0")
     testImplementation(kotlin("test"))
 }
 
