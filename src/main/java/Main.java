@@ -1,10 +1,6 @@
-import org.graalvm.polyglot.Context;
+import org.springframework.boot.SpringApplication;
+import top.yunp.asws.SApplication;
 
-public class Main {
-
-    public static void main(String[] args) {
-        try (var context = Context.create()) {
-            context.eval("js", "console.log('Hello from GraalJS!')");
-        }
-    }
+void main(String[] args) {
+    SpringApplication.run(SApplication.class, args);
 }
