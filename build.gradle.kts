@@ -3,6 +3,8 @@ import org.panteleyev.jpackage.ImageType
 plugins {
     kotlin("jvm") version "2.2.0"
     id("application")
+    id("org.springframework.boot") version "3.5.7"
+    id("io.spring.dependency-management") version "1.1.7"
     id("org.panteleyev.jpackageplugin") version "1.7.6"
 }
 
@@ -16,6 +18,9 @@ repositories {
 dependencies {
     implementation("org.graalvm.polyglot:polyglot:25.0.0")
     implementation("org.graalvm.polyglot:js:25.0.0")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation(kotlin("test"))
 }
 
