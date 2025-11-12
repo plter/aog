@@ -34,8 +34,12 @@ tasks.jpackage {
     mainClass.set(application.mainClass.get())
     destination.set(projectDir.resolve("build").resolve("jpackage"))
     appName.set(project.name)
-    mainJar.set("${project.name}-${project.version}.jar")
+    mainJar.set(tasks.jar.get().archiveFileName.get())
     type.set(ImageType.APP_IMAGE)
+
+    windows {
+        winConsole.set(true)
+    }
 }
 
 tasks.test {

@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "@apache-royale/royale-js": "^0.9.12",
+    "asconfigc": "^1.9.0"
+  }
+}
