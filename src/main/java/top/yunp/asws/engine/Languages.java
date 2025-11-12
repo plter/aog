@@ -1,3 +1,6 @@
+/*
+@author https://yunp.top
+ */
 package top.yunp.asws.engine;
 
 public class Languages {

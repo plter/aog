@@ -1,5 +1,10 @@
+/*
+@author https://yunp.top
+ */
+
 package top.yunp.asws;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.graalvm.polyglot.Source;
@@ -9,6 +14,7 @@ import top.yunp.asws.engine.JsRuntime;
 import top.yunp.asws.engine.Languages;
 import top.yunp.asws.http.impl.HttpServletRequestWrapper;
 import top.yunp.asws.http.impl.HttpServletResponseWrapper;
+import top.yunp.asws.utils.ArgsParser;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,9 +24,13 @@ public class Gateway {
 
     private JsRuntime jsRuntime;
 
-    {
+    @PostConstruct
+    public void onInit() {
         try {
-            jsRuntime = new JsRuntime(Source.newBuilder(Languages.JS, new File("src/main/as3/bin/js-release/index.js")).build());
+            jsRuntime = new JsRuntime(
+                    Source.newBuilder(Languages.JS, new File(ArgsParser.getArg("--file"))).build(),
+                    ArgsParser.getArg("--class")
+            );
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

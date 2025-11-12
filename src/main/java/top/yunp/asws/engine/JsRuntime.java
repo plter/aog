@@ -1,3 +1,6 @@
+/*
+@author https://yunp.top
+ */
 package top.yunp.asws.engine;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,10 +16,16 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class JsRuntime {
 
     private final Source entrypoint;
-    private Queue<Context> contexts = new ConcurrentLinkedQueue<>();
+    private final String mainClassName;
+    private final Queue<Context> contexts = new ConcurrentLinkedQueue<>();
 
     public JsRuntime(Source entrypoint) {
+        this(entrypoint, null);
+    }
+
+    public JsRuntime(Source entrypoint, String mainClassName) {
         this.entrypoint = entrypoint;
+        this.mainClassName = mainClassName;
     }
 
     private Context accquireContext() throws IOException {
@@ -28,6 +37,10 @@ public class JsRuntime {
                     .build();
 
             context.eval(entrypoint);
+
+            if (mainClassName != null) {
+                context.eval(Languages.JS, "new " + mainClassName + "()");
+            }
         }
         return context;
     }
