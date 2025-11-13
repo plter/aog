@@ -5,12 +5,13 @@
 package top.yunp.asws.controllers
 {
 
-    public class Action
+    import top.yunp.asws.http.Request;
+    import top.yunp.asws.http.Response;
+
+    public abstract class Action
     {
 
-        public function Action()
-        {
+        public abstract function handle(req:Request, res:Response):void;
 
-        }
     }
 }

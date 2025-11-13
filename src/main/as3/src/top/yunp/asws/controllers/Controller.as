@@ -18,5 +18,10 @@ package top.yunp.asws.controllers
         {
             _actions.set (name, action);
         }
+
+        public function get actions():Map
+        {
+            return _actions;
+        }
     }
 }

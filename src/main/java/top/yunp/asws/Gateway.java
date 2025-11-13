@@ -36,7 +36,7 @@ public class Gateway {
         }
     }
 
-    @RequestMapping("/*")
+    @RequestMapping("/**")
     public void index(HttpServletRequest req, HttpServletResponse res) throws IOException {
         res.setCharacterEncoding("UTF-8");
         jsRuntime.handle(new HttpServletRequestWrapper(req), new HttpServletResponseWrapper(res));
