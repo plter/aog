@@ -11,7 +11,6 @@ package
 
             var cm:ControllersManager = new ControllersManager();
             cm.addController("", new IndexController());
-            cm.addController("index", new IndexController());
 
             eval("globalThis")["application"] = cm.handle;
         }
