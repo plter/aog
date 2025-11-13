@@ -16,8 +16,8 @@ repositories {
 }
 
 dependencies {
-    implementation("org.graalvm.polyglot:polyglot:25.0.0")
-    implementation("org.graalvm.polyglot:js:25.0.0")
+    implementation("org.graalvm.polyglot:polyglot:24.2.2")
+    implementation("org.graalvm.polyglot:js:24.2.2")
     implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -25,7 +25,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("Main")
+    mainClass.set("MainKt")
 }
 
 tasks.jpackage {
