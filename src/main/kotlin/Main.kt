@@ -2,8 +2,7 @@
 @author https://yunp.top
  */
 
-import org.springframework.boot.SpringApplication
-import top.yunp.asws.SApplication
+import io.ktor.server.netty.*
 import top.yunp.asws.utils.ArgsParser
 
 fun main(args: Array<String>) {
@@ -14,5 +13,5 @@ fun main(args: Array<String>) {
         return
     }
 
-    SpringApplication.run(SApplication::class.java, *args)
+    EngineMain.main(args)
 }
