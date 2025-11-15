@@ -1,4 +1,4 @@
-rootProject.name = "asws"
+rootProject.name = "aog"
 
 dependencyResolutionManagement {
     repositories {

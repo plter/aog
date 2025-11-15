@@ -1,41 +1,16 @@
 import org.panteleyev.jpackage.ImageType
 
-val kotlin_version: String by project
-val logback_version: String by project
-
 plugins {
-    kotlin("jvm") version "2.2.0"
-    id("application")
-    id("org.springframework.boot") version "3.5.7"
-    id("io.spring.dependency-management") version "1.1.7"
     id("org.panteleyev.jpackageplugin") version "1.7.6"
-    id("io.ktor.plugin") version "3.2.3"
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.ktor)
 }
 
 group = "top.yunp"
-version = "1.0"
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation("org.graalvm.polyglot:polyglot:24.2.2")
-    implementation("org.graalvm.polyglot:js:24.2.2")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("io.ktor:ktor-server-core")
-    implementation("io.ktor:ktor-server-websockets")
-    implementation("io.ktor:ktor-server-host-common")
-    implementation("io.ktor:ktor-server-netty")
-    implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("io.ktor:ktor-server-config-yaml")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testImplementation(kotlin("test"))
-}
+version = "1.0.0"
 
 application {
-    mainClass.set("MainKt")
+    mainClass = "MainKt"
 }
 
 tasks.jpackage {
@@ -52,6 +27,14 @@ tasks.jpackage {
     }
 }
 
-tasks.test {
-    useJUnitPlatform()
+dependencies {
+    implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.host.common)
+    implementation(libs.ktor.server.pebble)
+    implementation(libs.ktor.server.websockets)
+    implementation(libs.ktor.server.netty)
+    implementation(libs.logback.classic)
+    implementation(libs.ktor.server.config.yaml)
+    testImplementation(libs.ktor.server.test.host)
+    testImplementation(libs.kotlin.test.junit)
 }
