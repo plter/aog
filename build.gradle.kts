@@ -28,6 +28,8 @@ tasks.jpackage {
 }
 
 dependencies {
+    implementation("org.graalvm.polyglot:polyglot:24.2.2")
+    implementation("org.graalvm.polyglot:js:24.2.2")
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.host.common)
     implementation(libs.ktor.server.pebble)
