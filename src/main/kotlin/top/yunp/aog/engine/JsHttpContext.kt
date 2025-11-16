@@ -15,8 +15,11 @@ import io.ktor.server.response.respondRedirect
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.RoutingContext
 import io.ktor.server.websocket.DefaultWebSocketServerSession
+import io.ktor.websocket.send
 import kotlinx.coroutines.future.asCompletableFuture
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import org.slf4j.LoggerFactory
 import top.yunp.aog.async.IOScope
 
 class JsHttpContext(
@@ -31,6 +34,28 @@ class JsHttpContext(
 
     fun isWebSocket(): Boolean {
         return webSocketSession != null
+    }
+
+    fun receive(): WebSocketFrame? {
+        if (webSocketSession == null || !webSocketSession.isActive) {
+            return null
+        }
+        var r: WebSocketFrame? = null
+        try {
+            IOScope.launch {
+                r = WebSocketFrame(webSocketSession.incoming.receive())
+            }.asCompletableFuture().get()
+        } catch (e: Throwable) {
+            LOG.warn(e.message)
+            return null
+        }
+        return r
+    }
+
+    fun sendText(content: String) {
+        IOScope.launch {
+            webSocketSession?.send(content)
+        }.asCompletableFuture().get()
     }
 
     val uri: String
@@ -60,10 +85,11 @@ class JsHttpContext(
     fun redirect(url: String, permanent: Boolean) {
         IOScope.launch {
             routingContext?.call?.respondRedirect(Url(url), permanent)
-        }
+        }.asCompletableFuture().get()
     }
 
     companion object {
         val GSON = Gson()
+        val LOG = LoggerFactory.getLogger(JsHttpContext::class.java)
     }
 }

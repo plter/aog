@@ -42,7 +42,7 @@ class JsRuntime(private val source: Source, private val mainClass: String? = nul
         contexts.offer(context)
     }
 
-    fun handle(routingContext: RoutingContext) {
+    fun run(routingContext: RoutingContext) {
         val context: Context = acquireContext()
         try {
             val func = context.eval("js", "application")
@@ -56,7 +56,7 @@ class JsRuntime(private val source: Source, private val mainClass: String? = nul
         recycleContext(context)
     }
 
-    fun handle(session: DefaultWebSocketServerSession) {
+    fun run(session: DefaultWebSocketServerSession) {
         val context: Context = acquireContext()
         try {
             val func = context.eval("js", "application")

@@ -90,5 +90,23 @@ package top.yunp.aog.http
         {
             return _query;
         }
+
+        public function receive():WebSocketFrame
+        {
+            var f:* = _originalContext["receive"]();
+            if (f == null)
+            {
+                return null;
+            }
+            return new WebSocketFrame(f);
+        }
+
+        /**
+         * Send websocket text frame
+         */
+        public function sendText(content:String):void
+        {
+            _originalContext["sendText"](content);
+        }
     }
 }

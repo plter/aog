@@ -8,11 +8,10 @@ package top.yunp.aog
 import io.ktor.server.application.*
 import io.ktor.server.http.content.*
 import io.ktor.server.pebble.*
-import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
-import io.pebbletemplates.pebble.loader.ClasspathLoader
 import io.pebbletemplates.pebble.loader.FileLoader
+import top.yunp.aog.async.vtCoroutine
 import top.yunp.aog.engine.getJsRuntime
 import java.io.File
 import kotlin.time.Duration.Companion.seconds
@@ -30,11 +29,11 @@ fun Application.module() {
         masking = false
     }
     routing {
-        get("/{...}") { getJsRuntime().handle(this) }
-        post("/{...}") { getJsRuntime().handle(this) }
+        get("/{...}") { vtCoroutine { getJsRuntime().run(this) } }
+        post("/{...}") { vtCoroutine { getJsRuntime().run(this) } }
         staticFiles("/static", File(environment.config.property("aog.web.static").getString()))
         webSocket("/${environment.config.property("aog.web.ws_base").getString()}/{...}") {
-            getJsRuntime().handle(this)
+            vtCoroutine { getJsRuntime().run(this) }
         }
     }
 }
