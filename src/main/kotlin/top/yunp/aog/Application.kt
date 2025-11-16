@@ -11,10 +11,8 @@ import io.ktor.server.pebble.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
-import io.ktor.websocket.*
 import io.pebbletemplates.pebble.loader.ClasspathLoader
-import top.yunp.aog.web.handleHttpRequest
-import top.yunp.aog.web.handleWebSocketRequest
+import top.yunp.aog.engine.getJsRuntime
 import kotlin.time.Duration.Companion.seconds
 
 fun Application.module() {
@@ -31,14 +29,16 @@ fun Application.module() {
     }
     routing {
 
-        get("/{...}") { handleHttpRequest() }
-        post("/{...}") { handleHttpRequest() }
+        get("/{...}") { getJsRuntime().handle(this) }
+        post("/{...}") { getJsRuntime().handle(this) }
 
         staticResources("/static", "static")
 
         get("/pebble-index") {
             call.respond(PebbleContent("pebble-index.html", mapOf("user" to 1)))
         }
-        webSocket("/ws/{...}") { handleWebSocketRequest() }
+        webSocket("/${environment.config.property("aog.websocket.base").getString()}/{...}") {
+            getJsRuntime().handle(this)
+        }
     }
 }

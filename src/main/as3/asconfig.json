@@ -1,0 +1,13 @@
+{
+	"config": "node",
+	"compilerOptions": {
+		"targets": [
+			"JSNode"
+		],
+		"source-path": [
+			"src"
+		],
+		"source-map": true
+	},
+	"mainClass": "Main"
+}

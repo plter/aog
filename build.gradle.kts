@@ -13,6 +13,21 @@ application {
     mainClass = "MainKt"
 }
 
+tasks.register("buildAS3", Exec::class.java) {
+    group = "build"
+    workingDir = projectDir.resolve("src").resolve("main").resolve("as3")
+    commandLine(
+        if (System.getProperty("os.name").lowercase().contains("windows")) "cmd" else "sh",
+        "-c",
+        "npm run release"
+    )
+}
+
+tasks.register("buildAS3AndRun") {
+    group = "application"
+    dependsOn("buildAS3", "run")
+}
+
 tasks.jpackage {
     dependsOn(tasks.clean, tasks.installDist)
     input.set(projectDir.resolve("build").resolve("install").resolve(project.name).resolve("lib"))

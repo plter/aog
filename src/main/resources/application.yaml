@@ -4,3 +4,11 @@ ktor:
       - top.yunp.aog.ApplicationKt.module
   deployment:
     port: 8080
+
+
+aog:
+  websocket:
+    base: /ws
+  entrypoint:
+    file: src/main/as3/bin/js-release/Main.js
+    class: Main
