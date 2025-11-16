@@ -11,6 +11,13 @@ aog:
     static: src/main/as3/static
     templates: src/main/as3/templates
     ws_base: /ws
+  db:
+    dialect: mysql
+    host: 127.0.0.1
+    port: 3106
+    user: root
+    pass: example
+    db_name: aog
   entrypoint:
     file: src/main/as3/bin/js-release/Main.js
     class: Main

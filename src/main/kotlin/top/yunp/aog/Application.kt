@@ -12,6 +12,7 @@ import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
 import io.pebbletemplates.pebble.loader.FileLoader
 import top.yunp.aog.async.vtCoroutine
+import top.yunp.aog.db.getKtorm
 import top.yunp.aog.engine.getJsRuntime
 import java.io.File
 import kotlin.time.Duration.Companion.seconds

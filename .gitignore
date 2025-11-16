@@ -49,3 +49,4 @@ js-debug
 js-release
 node_modules
 package-lock.json
+mariadb_data

@@ -19,8 +19,10 @@ import io.ktor.websocket.send
 import kotlinx.coroutines.future.asCompletableFuture
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import org.ktorm.database.Database
 import org.slf4j.LoggerFactory
 import top.yunp.aog.async.IOScope
+import top.yunp.aog.db.getKtorm
 
 class JsHttpContext(
     private val routingContext: RoutingContext? = null,
@@ -71,12 +73,23 @@ class JsHttpContext(
         }
 
     fun end(content: String, contentType: String = "text/html", code: Int = 200) {
-
         val call = (routingContext?.call) ?: (webSocketSession?.call) ?: return
 
         IOScope.launch {
             call.respondText(content, ContentType.parse(contentType), HttpStatusCode(code, "OK"))
         }.asCompletableFuture().get()
+    }
+
+    fun appendCookie(
+        name: String, value: String,
+        maxAge: Long? = null, domain: String? = null, path: String? = null
+    ) {
+        routingContext?.call?.response?.cookies?.append(
+            name, value,
+            maxAge = maxAge,
+            domain = domain,
+            path = path
+        )
     }
 
 
@@ -93,6 +106,11 @@ class JsHttpContext(
             routingContext?.call?.respondRedirect(Url(url), permanent)
         }.asCompletableFuture().get()
     }
+
+    val db: Database?
+        get() {
+            return ((routingContext?.call) ?: (webSocketSession?.call))?.application?.getKtorm()
+        }
 
     companion object {
         val GSON = Gson()

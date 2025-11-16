@@ -42,10 +42,18 @@ tasks.jpackage {
     }
 }
 
+val ktormVersion = "4.1.1"
+
 dependencies {
+    implementation("org.ktorm:ktorm-core:$ktormVersion")
+    implementation("org.ktorm:ktorm-support-mysql:$ktormVersion")
+    implementation("org.ktorm:ktorm-support-sqlite:$ktormVersion")
+    implementation("org.ktorm:ktorm-support-postgresql:$ktormVersion")
     implementation("com.google.code.gson:gson:2.13.2")
     implementation("org.graalvm.polyglot:polyglot:24.2.2")
     implementation("org.graalvm.polyglot:js:24.2.2")
+    implementation("com.zaxxer:HikariCP:7.0.2")
+    implementation("com.mysql:mysql-connector-j:9.5.0")
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.host.common)
     implementation(libs.ktor.server.pebble)

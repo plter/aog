@@ -113,5 +113,10 @@ package top.yunp.aog.http
         {
             _originalContext["sendBytes"](data);
         }
+
+        public function appendCookie(name:String, value:String, maxAge:int = null, domain:String = null, path:String = null):void
+        {
+            _originalContext["appendCookie"](name, value, maxAge, domain, path);
+        }
     }
 }
