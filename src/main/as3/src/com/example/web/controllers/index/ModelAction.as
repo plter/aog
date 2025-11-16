@@ -8,6 +8,7 @@ package com.example.web.controllers.index
     {
         override public function handle(context:AdapterContext):void
         {
+            // console.log(context.uri, context.path, context.query);
             context.template("index.html", {user: "aog"});
         }
     }

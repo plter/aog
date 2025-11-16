@@ -5,10 +5,6 @@ package com.example.web.controllers.index
 
     internal class IndexAction extends Action
     {
-        public function IndexAction()
-        {
-
-        }
 
         override public function handle(context:AdapterContext):void
         {

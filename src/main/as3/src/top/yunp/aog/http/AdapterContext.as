@@ -12,12 +12,27 @@ package top.yunp.aog.http
         private var _args:Array;
         private var _controllerName:String;
         private var _actionName:String;
+        private var _uri:String;
+        private var _path:String;
+        private var _query:String;
 
         public function AdapterContext(originalContext:*)
         {
             _originalContext = originalContext;
+            _uri = _originalContext["getUri"]();
 
-            var pathTokens:Array = this.getUri().split("/");
+            var qIndex:int = _uri.indexOf("?");
+            if (qIndex > -1)
+            {
+                _path = _uri.substring(0, qIndex);
+                _query = _uri.substring(qIndex + 1, _uri.length);
+            }
+            else
+            {
+                _path = _uri;
+                _query = "";
+            }
+            var pathTokens:Array = _path.split("/");
             _controllerName = pathTokens[1] || "";
             _actionName = pathTokens[2] || "";
 
@@ -31,9 +46,9 @@ package top.yunp.aog.http
             }
         }
 
-        public function getUri():String
+        public function get uri():String
         {
-            return _originalContext["getUri"]();
+            return _uri;
         }
 
         public function get args():Array
@@ -59,6 +74,16 @@ package top.yunp.aog.http
         public function template(template:String, data:*):void
         {
             _originalContext["template"](template, JSON.stringify(data));
+        }
+
+        public function get path():String
+        {
+            return _path;
+        }
+
+        public function get query():String
+        {
+            return _query;
         }
     }
 }
