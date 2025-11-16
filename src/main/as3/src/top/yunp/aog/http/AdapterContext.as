@@ -55,5 +55,10 @@ package top.yunp.aog.http
         {
             _originalContext["end"](content, contentType, code);
         }
+
+        public function template(template:String, data:*):void
+        {
+            _originalContext["template"](template, JSON.stringify(data));
+        }
     }
 }

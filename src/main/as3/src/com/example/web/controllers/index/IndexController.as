@@ -8,6 +8,7 @@ package com.example.web.controllers.index
         public function IndexController()
         {
             addAction("", new IndexAction());
+            addAction("model", new ModelAction());
         }
     }
 }

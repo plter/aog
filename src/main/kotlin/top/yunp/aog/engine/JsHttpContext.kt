@@ -5,8 +5,10 @@ Created on 2025/11/16
 
 package top.yunp.aog.engine
 
+import com.google.gson.Gson
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
+import io.ktor.server.pebble.respondTemplate
 import io.ktor.server.request.uri
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.RoutingContext
@@ -42,5 +44,18 @@ class JsHttpContext(
         IOScope.launch {
             call.respondText(content, ContentType.parse(contentType), HttpStatusCode(code, "OK"))
         }.asCompletableFuture().get()
+    }
+
+
+    fun template(template: String, data: String) {
+        @Suppress("UNCHECKED_CAST")
+        val model: Map<String, Any> = GSON.fromJson(data, Map::class.java) as Map<String, Any>
+        IOScope.launch {
+            routingContext?.call?.respondTemplate(template, model)
+        }.asCompletableFuture().get()
+    }
+
+    companion object {
+        val GSON = Gson()
     }
 }

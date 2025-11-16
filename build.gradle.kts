@@ -43,6 +43,7 @@ tasks.jpackage {
 }
 
 dependencies {
+    implementation("com.google.code.gson:gson:2.13.2")
     implementation("org.graalvm.polyglot:polyglot:24.2.2")
     implementation("org.graalvm.polyglot:js:24.2.2")
     implementation(libs.ktor.server.core)

@@ -7,10 +7,10 @@ ktor:
 
 
 aog:
-  static:
-    root_dir: src/main/as3/static
-  websocket:
-    base: /ws
+  web:
+    static: src/main/as3/static
+    templates: src/main/as3/templates
+    ws_base: /ws
   entrypoint:
     file: src/main/as3/bin/js-release/Main.js
     class: Main

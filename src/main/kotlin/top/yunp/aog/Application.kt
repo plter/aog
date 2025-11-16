@@ -12,14 +12,15 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
 import io.pebbletemplates.pebble.loader.ClasspathLoader
+import io.pebbletemplates.pebble.loader.FileLoader
 import top.yunp.aog.engine.getJsRuntime
 import java.io.File
 import kotlin.time.Duration.Companion.seconds
 
 fun Application.module() {
     install(Pebble) {
-        loader(ClasspathLoader().apply {
-            prefix = "templates"
+        loader(FileLoader().apply {
+            prefix = this@module.environment.config.property("aog.web.templates").getString()
         })
     }
     install(WebSockets) {
@@ -29,16 +30,10 @@ fun Application.module() {
         masking = false
     }
     routing {
-
         get("/{...}") { getJsRuntime().handle(this) }
         post("/{...}") { getJsRuntime().handle(this) }
-
-        staticFiles("/static", File(environment.config.property("aog.static.root_dir").getString()))
-
-        get("/pebble-index") {
-            call.respond(PebbleContent("pebble-index.html", mapOf("user" to 1)))
-        }
-        webSocket("/${environment.config.property("aog.websocket.base").getString()}/{...}") {
+        staticFiles("/static", File(environment.config.property("aog.web.static").getString()))
+        webSocket("/${environment.config.property("aog.web.ws_base").getString()}/{...}") {
             getJsRuntime().handle(this)
         }
     }
