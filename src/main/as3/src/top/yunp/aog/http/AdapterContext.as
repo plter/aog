@@ -76,6 +76,11 @@ package top.yunp.aog.http
             _originalContext["template"](template, JSON.stringify(data));
         }
 
+        public function redirect(url:String, permanent:Boolean = false):void
+        {
+            _originalContext["redirect"](url, permanent);
+        }
+
         public function get path():String
         {
             return _path;

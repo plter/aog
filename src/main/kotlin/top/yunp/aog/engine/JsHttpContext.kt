@@ -8,8 +8,10 @@ package top.yunp.aog.engine
 import com.google.gson.Gson
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.Url
 import io.ktor.server.pebble.respondTemplate
 import io.ktor.server.request.uri
+import io.ktor.server.response.respondRedirect
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.RoutingContext
 import io.ktor.server.websocket.DefaultWebSocketServerSession
@@ -53,6 +55,12 @@ class JsHttpContext(
         IOScope.launch {
             routingContext?.call?.respondTemplate(template, model)
         }.asCompletableFuture().get()
+    }
+
+    fun redirect(url: String, permanent: Boolean) {
+        IOScope.launch {
+            routingContext?.call?.respondRedirect(Url(url), permanent)
+        }
     }
 
     companion object {
