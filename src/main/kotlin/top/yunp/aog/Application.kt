@@ -13,6 +13,7 @@ import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
 import io.pebbletemplates.pebble.loader.ClasspathLoader
 import top.yunp.aog.engine.getJsRuntime
+import java.io.File
 import kotlin.time.Duration.Companion.seconds
 
 fun Application.module() {
@@ -32,7 +33,7 @@ fun Application.module() {
         get("/{...}") { getJsRuntime().handle(this) }
         post("/{...}") { getJsRuntime().handle(this) }
 
-        staticResources("/static", "static")
+        staticFiles("/static", File(environment.config.property("aog.static.root_dir").getString()))
 
         get("/pebble-index") {
             call.respond(PebbleContent("pebble-index.html", mapOf("user" to 1)))
