@@ -58,6 +58,12 @@ class JsHttpContext(
         }.asCompletableFuture().get()
     }
 
+    fun sendBytes(data: ByteArray) {
+        IOScope.launch {
+            webSocketSession?.send(data)
+        }.asCompletableFuture().get()
+    }
+
     val uri: String
         get() {
             val req = (routingContext?.call?.request) ?: (webSocketSession?.call?.request)

@@ -7,6 +7,7 @@ package com.example.web.controllers.ws
         public function WsController()
         {
             addAction("index", new Index());
+            addAction("data", new Data());
         }
     }
 }

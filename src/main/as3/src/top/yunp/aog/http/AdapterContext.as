@@ -108,5 +108,10 @@ package top.yunp.aog.http
         {
             _originalContext["sendText"](content);
         }
+
+        public function sendBytes(data:*):void
+        {
+            _originalContext["sendBytes"](data);
+        }
     }
 }
