@@ -8,6 +8,7 @@ package top.yunp.aog.db
 import io.ktor.server.application.Application
 import org.ktorm.database.Database
 import org.ktorm.database.SqlDialect
+import org.ktorm.dsl.from
 import org.ktorm.support.mysql.MySqlDialect
 import top.yunp.aog.constants.ApplicationAttrKeys
 
