@@ -5,6 +5,8 @@ Created on 2025/11/16
 
 package top.yunp.aog.http
 {
+    import top.yunp.aog.db.Database;
+
     public class AdapterContext
     {
 
@@ -117,6 +119,17 @@ package top.yunp.aog.http
         public function appendCookie(name:String, value:String, maxAge:int = null, domain:String = null, path:String = null):void
         {
             _originalContext["appendCookie"](name, value, maxAge, domain, path);
+        }
+
+        private var _db:Database;
+
+        public function get db():Database
+        {
+            if (_db == null)
+            {
+                _db = new Database(_originalContext["getDb"]());
+            }
+            return _db;
         }
     }
 }
