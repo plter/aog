@@ -22,7 +22,9 @@ import kotlinx.coroutines.launch
 import org.ktorm.database.Database
 import org.slf4j.LoggerFactory
 import top.yunp.aog.async.IOScope
+import top.yunp.aog.db.DatabaseWrapper
 import top.yunp.aog.db.getKtorm
+import top.yunp.aog.db.getKtormWrapper
 
 class JsHttpContext(
     private val routingContext: RoutingContext? = null,
@@ -107,9 +109,9 @@ class JsHttpContext(
         }.asCompletableFuture().get()
     }
 
-    val db: Database?
+    val db: DatabaseWrapper?
         get() {
-            return ((routingContext?.call) ?: (webSocketSession?.call))?.application?.getKtorm()
+            return ((routingContext?.call) ?: (webSocketSession?.call))?.application?.getKtormWrapper()
         }
 
     companion object {

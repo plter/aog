@@ -5,10 +5,9 @@ Created on 2025/11/16
 
 package top.yunp.aog.db
 
-import io.ktor.server.application.Application
+import io.ktor.server.application.*
 import org.ktorm.database.Database
 import org.ktorm.database.SqlDialect
-import org.ktorm.dsl.from
 import org.ktorm.support.mysql.MySqlDialect
 import top.yunp.aog.constants.ApplicationAttrKeys
 
@@ -26,4 +25,13 @@ fun Application.getKtorm(): Database {
         attributes[ApplicationAttrKeys.KTORM] = k
     }
     return k
+}
+
+fun Application.getKtormWrapper(): DatabaseWrapper {
+    var kw = attributes.getOrNull(ApplicationAttrKeys.KTORM_WRAPPER)
+    if (kw == null) {
+        kw = DatabaseWrapper(getKtorm())
+        attributes[ApplicationAttrKeys.KTORM_WRAPPER] = kw
+    }
+    return kw
 }
