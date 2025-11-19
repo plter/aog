@@ -7,11 +7,17 @@ package top.yunp.aog.db
 
 import org.ktorm.database.Database
 import org.ktorm.database.asIterable
+import org.ktorm.dsl.QuerySource
+import org.ktorm.dsl.from
 
-class DatabaseWrapper(private val ktorm: Database) {
+class DatabaseWrapper(public val ktorm: Database) {
 //    fun exec(sql: String) {
 //        ktorm.useConnection { connection ->
 //            connection.createStatement().executeQuery(sql).asIterable()
 //        }
 //    }
+
+    fun from(table: KTable): QuerySource {
+        return ktorm.from(table)
+    }
 }

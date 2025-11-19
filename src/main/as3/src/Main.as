@@ -10,6 +10,7 @@ package
 
     import top.yunp.aog.controllers.ControllersManager;
     import com.example.web.controllers.ws.WsController;
+    import com.example.web.controllers.user.UserController;
 
     public class Main
     {
@@ -19,6 +20,7 @@ package
             cm.addController("", new IndexController());
             cm.addController("default", new IndexController());
             cm.addController("ws", new WsController());
+            cm.addController("user", new UserController());
 
             eval("globalThis")["application"] = cm.handle;
         }

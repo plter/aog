@@ -13,5 +13,11 @@ package top.yunp.aog.db
         {
             _kColumn = kColumn;
         }
+
+        public function primaryKey():Column
+        {
+            _kColumn["primaryKey"]();
+            return this;
+        }
     }
 }
