@@ -36,9 +36,19 @@ package top.yunp.aog.db
             return new Column(_kTable["bigint"](field));
         }
 
+        public function bigintPrimary(field:String):Column
+        {
+            return new Column(_kTable["bigintPrimary"](field));
+        }
+
         public function integer(field:String):Column
         {
             return new Column(_kTable["integer"](field));
+        }
+
+        public function integerPrimary(field:String):Column
+        {
+            return new Column(_kTable["integerPrimary"](field));
         }
 
         public function smallint(field:String):Column

@@ -11,7 +11,7 @@ package com.example.web.db.tables
         {
             super("auth_user");
 
-            integer("id").primaryKey();
+            integerPrimary("id");
             string("name");
             integer("age");
         }

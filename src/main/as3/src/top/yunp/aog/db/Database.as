@@ -15,7 +15,7 @@ package top.yunp.aog.db
             _kDb = nativeDb;
         }
 
-        public function from(table:Table):*
+        public function from(table:Table):QuerySource
         {
             return new QuerySource(_kDb["from"](table.nativeTable));
         }
