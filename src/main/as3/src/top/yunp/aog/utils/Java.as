@@ -14,6 +14,15 @@ package top.yunp.aog.utils
         {
             return NativeJava["type"](def);
         }
+
+        public static function inspect(obj:*):void
+        {
+            var methods:Array = obj["getClass"]()["getMethods"]();
+            for each (var method:Object in methods)
+            {
+                console.log("Method: " + method["getName"]());
+            }
+        }
     }
 
 }

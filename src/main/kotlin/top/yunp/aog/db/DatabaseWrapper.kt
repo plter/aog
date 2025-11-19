@@ -6,8 +6,6 @@ Created on 2025/11/18
 package top.yunp.aog.db
 
 import org.ktorm.database.Database
-import org.ktorm.database.asIterable
-import org.ktorm.dsl.QuerySource
 import org.ktorm.dsl.from
 
 class DatabaseWrapper(public val ktorm: Database) {
@@ -17,7 +15,7 @@ class DatabaseWrapper(public val ktorm: Database) {
 //        }
 //    }
 
-    fun from(table: KTable): QuerySource {
-        return ktorm.from(table)
+    fun from(table: KTable): KQuerySource {
+        return KQuerySource(ktorm.from(table))
     }
 }

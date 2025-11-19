@@ -5,6 +5,8 @@ Created on 2025/11/17
 
 package top.yunp.aog.db
 {
+    import top.yunp.aog.utils.Java;
+
     public class QuerySource
     {
 
@@ -13,6 +15,8 @@ package top.yunp.aog.db
         public function QuerySource(kQuerySource:*)
         {
             _kQuerySource = kQuerySource;
+
+            // Java.inspect(_kQuerySource);
         }
     }
 }
