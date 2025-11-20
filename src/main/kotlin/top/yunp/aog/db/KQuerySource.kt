@@ -11,7 +11,7 @@ import org.ktorm.dsl.select
 
 class KQuerySource(private val querySource: QuerySource) {
 
-    fun select(): Query {
-        return querySource.select()
+    fun select(): KQuery {
+        return KQuery(querySource.select())
     }
 }

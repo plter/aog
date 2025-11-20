@@ -8,7 +8,7 @@ package com.example.web.controllers.user
     {
         override public function handle(context:AdapterContext):void
         {
-            console.log(context.db.from(User.user));
+            console.log(context.db.from(User.user).select());
             context.end("OK");
         }
     }
