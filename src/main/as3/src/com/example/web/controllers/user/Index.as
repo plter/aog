@@ -8,7 +8,11 @@ package com.example.web.controllers.user
     {
         override public function handle(context:AdapterContext):void
         {
-            console.log(context.db.from(User.user).select());
+
+            var data:Array = context.db.from(User.user).select().where(
+                    User.user.id.gt(0).and(User.user.id.lt(2))
+                ).toList();
+            console.log(data);
             context.end("OK");
         }
     }

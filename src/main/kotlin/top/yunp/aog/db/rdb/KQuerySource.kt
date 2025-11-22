@@ -3,9 +3,8 @@ Created on 2025/11/20
 @author https://yunp.top
  */
 
-package top.yunp.aog.db
+package top.yunp.aog.db.rdb
 
-import org.ktorm.dsl.Query
 import org.ktorm.dsl.QuerySource
 import org.ktorm.dsl.select
 

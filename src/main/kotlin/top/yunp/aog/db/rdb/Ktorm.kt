@@ -3,7 +3,7 @@ Created on 2025/11/16
 @author https://yunp.top
  */
 
-package top.yunp.aog.db
+package top.yunp.aog.db.rdb
 
 import io.ktor.server.application.*
 import org.ktorm.database.Database

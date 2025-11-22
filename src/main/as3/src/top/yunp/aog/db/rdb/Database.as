@@ -3,7 +3,7 @@ Created on 2025/11/17
 @author https://yunp.top
  */
 
-package top.yunp.aog.db
+package top.yunp.aog.db.rdb
 {
     public class Database
     {
@@ -17,7 +17,7 @@ package top.yunp.aog.db
 
         public function from(table:Table):QuerySource
         {
-            return new QuerySource(_kDb["from"](table.nativeTable));
+            return new QuerySource(_kDb["from"](table.nativeObject));
         }
     }
 }

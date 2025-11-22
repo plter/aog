@@ -19,12 +19,10 @@ import io.ktor.websocket.send
 import kotlinx.coroutines.future.asCompletableFuture
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import org.ktorm.database.Database
 import org.slf4j.LoggerFactory
 import top.yunp.aog.async.IOScope
-import top.yunp.aog.db.DatabaseWrapper
-import top.yunp.aog.db.getKtorm
-import top.yunp.aog.db.getKtormWrapper
+import top.yunp.aog.db.rdb.DatabaseWrapper
+import top.yunp.aog.db.rdb.getKtormWrapper
 
 class JsHttpContext(
     private val routingContext: RoutingContext? = null,

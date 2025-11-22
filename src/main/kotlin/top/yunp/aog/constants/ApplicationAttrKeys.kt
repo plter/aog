@@ -7,7 +7,7 @@ package top.yunp.aog.constants
 
 import io.ktor.util.AttributeKey
 import org.ktorm.database.Database
-import top.yunp.aog.db.DatabaseWrapper
+import top.yunp.aog.db.rdb.DatabaseWrapper
 import top.yunp.aog.engine.JsRuntime
 import javax.sql.DataSource
 
