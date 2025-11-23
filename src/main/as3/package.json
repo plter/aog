@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "release": "asconfigc --debug=false"
+    "release": "asconfigc --debug=false",
+    "start": "asconfigc --debug=false&&aog -config=web.conf"
   },
   "devDependencies": {
     "@apache-royale/royale-js": "^0.9.12",

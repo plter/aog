@@ -19,5 +19,10 @@ package top.yunp.aog.db.rdb
         {
             return new QuerySource(_kDb["from"](table.nativeObject));
         }
+
+        public function exec(sql:String, args:Array = null, type:String = "QUERY"):*
+        {
+            return _kDb["exec"](sql, args || [], type);
+        }
     }
 }

@@ -20,7 +20,7 @@ fun Application.getJsRuntime(): JsRuntime {
         if (!file.exists()){
             throw IllegalStateException("File ${file.absoluteFile} not exists")
         }
-        val className = environment.config.property("aog.entrypoint.class").getString()
+        val className = environment.config.propertyOrNull("aog.entrypoint.class")?.getString()
         LOG.info("Entrypoint: file=${file.absoluteFile}, class=$className")
         runtime = JsRuntime(
             Source.newBuilder(Languages.JS, file).build(),
